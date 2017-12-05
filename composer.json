@@ -1,0 +1,48 @@
+{
+    "name": "get-stream/stream-doctrine-example",
+    "homepage": "https://getstream.io/",
+    "description": "Example application for get-stream/stream-doctrine",
+    "keywords": ["stream", "feed", "feedly", "getstream", "activity", "newsfeed", "activity feed", "notification feed", "aggregated feed", "doctrine", "symfony", "orm"],
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Hannes Van De Vreken",
+            "email": "hannes@getstream.io"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "league/container": "^2.4",
+        "vlucas/phpdotenv": "^2.4",
+        "get-stream/stream-doctrine": "1.0.0-alpha.1",
+        "psr7-sessions/storageless": "^3.0",
+        "zendframework/zend-diactoros": "^1.6",
+        "league/route": "^3.0",
+        "mindplay/middleman": "^2.0",
+        "madewithlove/psr15-bridge": "^0.1.0",
+        "twig/twig": "^2.4",
+        "filp/whoops": "^2.1",
+        "league/tactician": "^1.0",
+        "ramsey/uuid": "^3.7",
+        "monolog/monolog": "^1.23",
+        "ramsey/uuid-doctrine": "^1.4",
+        "doctrine/migrations": "^1.6",
+        "cakephp/chronos": "^1.1",
+        "fzaninotto/faker": "^1.7",
+        "league/tactician-container": "^2.0"
+    },
+    "scripts": {
+        "migrate": [
+            "echo '' > storage/db.sqlite",
+            "php cli db:migrate",
+            "php cli db:seed"
+        ],
+        "generate:key": "sed -i '' 's/^SESSION_SECRET=.*$/SESSION_SECRET='`openssl rand -hex 32`'/' .env"
+    },
+    "minimum-stability": "stable"
+}

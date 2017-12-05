@@ -1,0 +1,21 @@
+{
+  "name": "Stream Doctrine Example App",
+  "description": "Twitter esque example app using GetStream.io",
+  "keywords": [
+    "getstream.io",
+    "PHP",
+    "Doctrine",
+    "ORM"
+  ],
+  "website": "https://getstream.io/",
+  "repository": "https://github.com/GetStream/stream-example-doctrine",
+  "logo": "http://33.media.tumblr.com/avatar_be8b5eef9ae6_128.png",
+  "success_url": "/login/demo",
+  "addons": [
+    "stream",
+    "heroku-postgresql"
+  ],
+  "scripts": {
+    "postdeploy": "touch .env; composer migrate"
+  }
+}

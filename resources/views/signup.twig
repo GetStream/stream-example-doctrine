@@ -1,0 +1,55 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<div class="row">
+  <div class="page-header">
+    <h1>Register</h1>
+  </div>
+  <div class="row form-component">
+    <form class="form-horizontal col-lg-6" method="post" action="/signup">
+      <fieldset>
+        {% if errors.signup_failed %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Oh snap!</strong>
+          Some details were insufficient.
+          Please provide a valid and unused email address and username, and a password of minimum 6 characters.
+        </div>
+        {% endif %}
+        <div class="row form-group">
+          <label for="email" class="col-lg-3 control-label">Email</label>
+          <div class="col-lg-6">
+            <input class="form-control" name="email" type="email" placeholder="john.doe@domain.com">
+          </div>
+        </div>
+        <div class="row form-group">
+          <label for="email" class="col-lg-3 control-label">Username</label>
+          <div class="col-lg-6">
+            <input class="form-control" name="username" type="text" placeholder="john.doe">
+          </div>
+        </div>
+        <div class="row form-group">
+          <label for="name" class="col-lg-3 control-label">Full name</label>
+          <div class="col-lg-2">
+            <input class="form-control" name="first_name" type="text" placeholder="John"/>
+          </div>
+          <div class="col-lg-4">
+            <input class="form-control" name="last_name" type="text" placeholder="Doe"/>
+          </div>
+        </div>
+        <div class="row form-group">
+          <label for="password" class="col-lg-3 control-label">Password</label>
+          <div class="col-lg-6">
+            <input class="form-control" name="password" type="password" placeholder="correct horse battery staple">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-3 col-lg-offset-3">
+            <button class="form-control btn btn-primary" type="submit">Register</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+{% endblock %}

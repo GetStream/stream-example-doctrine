@@ -1,0 +1,16 @@
+[
+  {
+    "username": "demo",
+    "first_name": "Heroku",
+    "last_name": "User",
+    "email": "heroku@getstream.io",
+    "password": "secret"
+  },
+  {
+    "username": "hannes",
+    "first_name": "Hannes",
+    "last_name": "Van De Vreken",
+    "email": "hannes@getstream.io",
+    "password": "secret"
+  }
+]

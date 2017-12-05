@@ -1,0 +1,4 @@
+/builds/
+/vendor/
+/storage/
+.env

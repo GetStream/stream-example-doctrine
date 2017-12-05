@@ -1,0 +1,49 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<div class="row">
+  <div class="jumbotron">
+    <h1>Time to follow (un)follow some people!</h1>
+    <p>
+      The list below shows other people who post stuff on their profile.
+      If you follow them, you'll get to see their posts in your timeline.
+      If you want to check out what they're talking about, click on their names or avatars to find out.
+    </p>
+    <p>
+      Want to see less of their posts? Then simply unfollow them for less noise ;-)
+    </p>
+  </div>
+</div>
+<div class="row">
+  {% if users is empty %}
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">No results</h3>
+      </div>
+      <div class="panel-body">
+        We haven't found anybody with this search term. Please try again.
+      </div>
+    </div>
+  {% else %}
+    <ul class="list-group">
+      {% for result in users %}
+        <li class="list-group-item">
+          <a href="/{{ result.username }}">
+          <div class="row">
+            <img class="col-lg-2 col-md-2 col-sm-2 col-xs-2" src="{{ result.avatarUrl }}">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+              <div class="row">
+                <h4>{{ result.name }} <small>({{ result.username }})</small></h4>
+              </div>
+              <div class="row">
+                {% include 'partials/follow-button.twig' with {user: user, target: result} %}
+              </div>
+            </div>
+          </div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}

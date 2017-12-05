@@ -1,0 +1,56 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<div class="row">
+  <div class="jumbotron">
+    <div class="row">
+      <img class="col-lg-3" src="{{ profile.avatarUrl }}">
+      <div class="col-lg-9">
+        <h1>This is{% if user == profile %} your {% else %} {{ profile.firstName }}'s {% endif %} profile!</h1>
+        {% if user != profile %}
+          <p>
+            On this page you can see what they've been doing. Which posts they posted, which posts they've liked.
+          </p>
+          <p>
+            {% include 'partials/follow-button.twig' with {user: user, target: profile} %}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<h3>Here are{% if user == profile %} your {% else %} {{ profile.firstName }}'s {% endif %}updates:</h3>
+<div class="row">
+  <ul class="list-group">
+    {% for activity in activities %}
+      <li class="list-group-item">
+        {% if activity.verb == 'like' %}
+          <div class="row">
+            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              {% if user == profile %}
+                You have liked this post:
+              {% else %}
+                {{ profile.firstName }} has liked this post:
+              {% endif %}
+            </p>
+          </div>
+          {% include 'partials/post.twig' with {activity: activity, has_liked: has_liked} %}
+        {% elseif activity.verb == 'post' %}
+          <div class="row">
+            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              {% if user == profile %}
+                You have posted this:
+              {% else %}
+                {{ profile.firstName }} has posted:
+              {% endif %}
+            </p>
+          </div>
+          {% include 'partials/post.twig' with {activity: activity, has_liked: has_liked}%}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

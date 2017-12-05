@@ -1,0 +1,73 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<div class="row">
+  <div class="jumbotron">
+    <h1>Hello, {{ user.name }}!</h1>
+    <p>
+      Welcome to this showcase application. This application acts as a social platform, where you can posts
+      updates, follow people, and give kudos (or likes) on posts using the heart icon.
+    </p>
+    <p>
+      This is built using Doctrine ORM, and <a href="https://getstream.io">getstream.io</a>.
+      The data, which is stored using Doctrine, is sent to GetStream via the <code>getstream/stream-doctrine</code> integration.
+       Every feed in this application is sourced from GetStream, enriched into Entities using Doctrine, and shown using Twig templates.
+    </p>
+    <p>
+      <a class="btn btn-primary btn-lg" href="https://github.com/getstream/stream-example-doctrine/blob/master/README.md">Read more about the code</a>
+    </p>
+    <p>
+      This is your timeline. What you see in here are posts by you, and the people you follow.
+      If you hit "profiles" on top, you can follow more people, and their posts will appear here too!
+      Add a post yourself with the text box below.
+    </p>
+    {% if user.follows.count == 0 %}
+    <p>
+      <a class="btn btn-primary btn-lg" href="/profiles">Follow more people</a>
+    </p>
+    {% endif %}
+  </div>
+</div>
+<div class="row form-component">
+  <form class="form-horizontal col-lg-6 well well-lg" method="post" action="/posts">
+    <fieldset>
+      <div class="row form-group">
+        <h3 class="col-lg-12">Write a new post</h3>
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-12">
+          <textarea class="form-control" rows="2" name="post"></textarea>
+          <span class="help-block">Write something about your day in 280 chars.</span>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-12">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<br>
+<br>
+<div class="row">
+  {% if posts is empty %}
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">No posts yet.</h3>
+      </div>
+      <div class="panel-body">
+        Follow someone or post something about your day.
+      </div>
+    </div>
+  {% else %}
+    <ul class="list-group">
+      {% for activity in posts %}
+        <li class="list-group-item">
+          {% include 'partials/post.twig' with {activity: activity, has_liked: has_liked} %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}

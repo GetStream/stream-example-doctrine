@@ -1,0 +1,19 @@
+#! /usr/bin/env php
+<?php
+
+require 'vendor/autoload.php';
+
+exit(call_user_func(function () {
+    $app = new Symfony\Component\Console\Application('Demo app');
+    $app->setAutoExit(false);
+
+    $container = App\Infrastructure\ContainerFactory::create(__DIR__);
+    $container->add(Symfony\Component\Console\Application::class, $app);
+
+    $app->addCommands([
+        $container->get(App\Commands\SeedCommand::class),
+        $container->get(App\Commands\MigrateCommand::class),
+    ]);
+
+    return $app->run();
+}));

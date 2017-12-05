@@ -1,0 +1,22 @@
+{% if post.likes.matching(has_liked).count == 0 %}
+  <form action="/likes" method="post" name="like-{{ post.id }}">
+    <input type="hidden" name="post_id" value="{{ post.id }}">
+    <span
+      class="glyphicon glyphicon-heart-empty"
+      aria-hidden="true"
+      style="cursor:pointer; vertical-align: middle;"
+      onclick="document.forms['like-{{ post.id }}'].submit();"
+    ></span>
+  </form>
+{% else %}
+  <form action="/likes" method="post" name="unlike-{{ post.id }}">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="post_id" value="{{ post.id }}">
+    <span
+      class="glyphicon glyphicon-heart"
+      style="color:red; cursor:pointer; vertical-align: middle;"
+      aria-hidden="true"
+      onclick="document.forms['unlike-{{ post.id }}'].submit();"
+    ></span>
+  </form>
+{% endif %}
