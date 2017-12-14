@@ -46,7 +46,7 @@ class Likes
 
         $this->commandBus->handle(new Like($request->getAttribute('user'), $post));
 
-        return new RedirectResponse($request->getHeaderLine('Referer'));
+        return new RedirectResponse($request->getHeaderLine('Referer').'#'.$postId);
     }
 
     /**
@@ -62,6 +62,6 @@ class Likes
 
         $this->commandBus->handle(new Unlike($request->getAttribute('user'), $post));
 
-        return new RedirectResponse($request->getHeaderLine('Referer'));
+        return new RedirectResponse($request->getHeaderLine('Referer').'#'.$postId);
     }
 }

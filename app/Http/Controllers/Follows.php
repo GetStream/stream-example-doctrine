@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use League\Tactician\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\RedirectResponse;
 
 class Follows
@@ -52,7 +51,7 @@ class Follows
 
         $this->commandBus->handle(new Follow($user, $target));
 
-        return new RedirectResponse($request->getHeaderLine('Referer'));
+        return new RedirectResponse($request->getHeaderLine('Referer').'#'.$targetId);
     }
 
     /**
@@ -73,6 +72,6 @@ class Follows
 
         $this->commandBus->handle(new Unfollow($user, $target));
 
-        return new RedirectResponse($request->getHeaderLine('Referer'));
+        return new RedirectResponse($request->getHeaderLine('Referer').'#'.$targetId);
     }
 }
