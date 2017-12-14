@@ -25,7 +25,8 @@ class CreateHandler
      */
     public function handle(Create $command)
     {
-        $post = Post::create($command->getId(), $command->getCreator(), $command->getContent());
+        $content = mb_substr($command->getContent(), 0, 280);
+        $post = Post::create($command->getId(), $command->getCreator(), $content);
 
         $this->entityManager->persist($post);
         $this->entityManager->flush();
